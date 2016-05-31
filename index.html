@@ -10,21 +10,26 @@
     </head>
     <body>
 
-        <div class="container">
-            <form class="form-signin">
+        <div class="container" ng-controller="LoginController as loginCtrl">
+            <form name="loginForm" class="form-signin" ng-hide="isLoggedIn" novalidate>
                 <h2 class="form-signin-heading">Log in</h2>
                 <label for="inputEmail" class="sr-only">Email</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <input name="email" type="email" id="inputEmail" ng-model="email" class="form-control" placeholder="Email" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input name="password" type="password" id="inputPassword" ng-model="password" class="form-control" placeholder="Password" required>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me">
                         Remember me
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block" ng-click="loginForm.$valid && loginUser()" type="submit">Sign in</button>
             </form>
+            <div ng-show="isLoggedIn" class="jumbotron">
+                <h1 >Welcome
+                    {{username}}</h1>
+                <button class="btn btn-danger" ng-click="logoutUser()" type="submit">logout</button>
+            </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
